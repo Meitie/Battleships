@@ -1,6 +1,10 @@
 import random
 
+
 def set_up_board():
+    """
+    Create the board set up in a 2d array
+    """
     computer_board = [['0' for i in range(11)] for j in range(11)]
 
     for i in range(len(computer_board)):
@@ -14,6 +18,9 @@ def set_up_board():
 
 
 def dictionary_board():
+    """
+    Create a dictionary of keys that relate to each spot on the 2d array board
+    """
     dictionary_keys = []
 
     for i in range(10):
@@ -32,8 +39,10 @@ def dictionary_board():
     return grid_system
 
 
-
 def print_board(computer_board):
+    """
+    print out the board each line by line
+    """
     print("---------------------------------------------")
     print("COMPUTERS BOARD")
     for i in computer_board:
@@ -41,7 +50,9 @@ def print_board(computer_board):
 
 
 def inside_grid(boat_cords, direction, ship_size):
-    """SWAP AROUND"""
+    """
+    Checks to make sure that the boat can be placed inside of the board or not, and wether it goes out of bounds
+    """
     letter_cord = boat_cords[0]
     num_cord = boat_cords[1]
     if direction == 1 or direction == 3:
@@ -57,6 +68,9 @@ def inside_grid(boat_cords, direction, ship_size):
 
 
 def end_boat(boat_cords, direction, ship_size):
+    """
+    Used ot find the end of the boat given the starting location and a direction and the ships size
+    """
     letter_cord = boat_cords[0]
     num_cord = boat_cords[1]
     letter_cord = chr(ord(letter_cord) + ship_size - 1)
@@ -64,11 +78,18 @@ def end_boat(boat_cords, direction, ship_size):
     print("boat_cords", boat_cords)
     return boat_cords
 
+
 def random_direction():
+    """
+    Returns a randomly generated number between 1 and 4
+    """
     return random.randint(1,4)
 
 
 def setup_boats():
+    """
+    Creates a dictionary of every boats starting location. 
+    """
     ships = {
         "carrier": f"{chr(random.randint(ord('A'), ord('J')))}{random.randint(1,10)}",
         "battleship": f"{chr(random.randint(ord('A'), ord('J')))}{random.randint(1,10)}",
@@ -80,6 +101,9 @@ def setup_boats():
 
 
 def print_to_board(board, dict_board, boat_cords):
+    """
+    Takes the boats current co-ordinates and prints them out onto the board
+    """
     print(boat_cords)
     if boat_cords[0][1] == boat_cords[1][1]:
         x = ord(boat_cords[0][0]) - ord("A") + 1
@@ -92,6 +116,9 @@ def print_to_board(board, dict_board, boat_cords):
 
 
 def place_boats(ships, board, dict_board):
+    """
+    Depending on the direction of the boat, this function will place the boat onto the board
+    """
     direction = 2
     # direction = random_direction()
     # print(direction)
@@ -114,8 +141,10 @@ def place_boats(ships, board, dict_board):
         # place_boats(ships, board, dict_board)
     
 
-
 def computer_boats():
+    """
+    Run at the start to set up the whole computer board and set up
+    """
     board = set_up_board()
     # print_board(board)
     ships = setup_boats()
@@ -124,5 +153,6 @@ def computer_boats():
     place_boats(ships, board, dict_board)
 
     print(f"The computer has set down its boats, Your Turn! :)")
+
 
 computer_boats()
